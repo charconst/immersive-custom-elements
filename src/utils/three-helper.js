@@ -8,18 +8,22 @@ import {
   RingBufferGeometry,
   SphereBufferGeometry,
   Texture,
-  TextureLoader
+  TextureLoader,
+  FrontSide,
+  DoubleSide
 } from 'three';
 
 class THREEHelper {
   static createSphereMeshFor360(texture) {
-    return new Mesh(
+    var mesh = new Mesh(
       new SphereBufferGeometry(500, 60, 40),
       new MeshBasicMaterial({
         map: texture,
-        side: BackSide
+        side: DoubleSide,
       })
     );
+    mesh.scale.x = -1;
+    return mesh;
   }
 
   static load360ImageTexture(url) {
